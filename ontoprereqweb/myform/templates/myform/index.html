@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Получить пререквизиты</title>
+</head>
+<body>
+    <form method="post" action="{% url 'home' %}">
+        {% csrf_token %}
+        <label for="my_field">Введите концепт:</label>
+        <input type="text" id="my_field" name="my_field">
+        <button type="submit">Отправить</button>
+    </form>
+
+    {% if processed_variable %}
+        <p>Цепочка пререквизитов: {{ processed_variable }}</p>
+    {% endif %}
+</body>
+</html>
