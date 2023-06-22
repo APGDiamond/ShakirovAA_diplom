@@ -33,12 +33,22 @@ class PrereqChainService:
         print(res)
         return
 
+    def search_education_level(self, iri):
+        try:
+            level = iri.belongsToEducationalLevel[0]
+        except IndexError:
+            level = None
+        return level
     def chain_build(self, name):
         if name is None:
             return
         a = self.search_label(name)
         if a is not None:
-            self.chain_add(name)
+            try:
+                x = str(self.search_education_level(a).label[1])
+            except AttributeError:
+                x = 'Данные об уровне отсутствуют'
+            self.chain_add(name + ' (' + x + ')')
         else:
             print("В онтологии отсутствует данный концепт")
             return
@@ -47,7 +57,6 @@ class PrereqChainService:
 
     def prereq_count(self):
         onto_results = self.onto.search(hasPrerequisite='*')
-        onto_results_ru = self.onto.search(hasPrerequisiteRu='*')
-        return len(onto_results) + len(onto_results_ru)
+        return len(onto_results)
 
 

@@ -4,7 +4,7 @@
     <title>Получить пререквизиты</title>
 </head>
 <body>
-    <form method="post" action="{% url 'home' %}">
+    <form method="post" action="{% url 'index' %}">
         {% csrf_token %}
         <label for="my_field">Введите концепт:</label>
         <input type="text" id="my_field" name="my_field">
@@ -13,6 +13,7 @@
 
     {% if processed_variable %}
         <p>Цепочка пререквизитов: {{ processed_variable }}</p>
+        <p>Количество пререквизитов в онтологии: {{ prereq_count }}</p>
     {% endif %}
 </body>
 </html>
